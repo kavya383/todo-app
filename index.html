@@ -7,75 +7,70 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             height: 100vh;
         }
         .main-container {
             display: flex;
             width: 80%;
             background: white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             border-radius: 20px;
             overflow: hidden;
-            margin-top: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         .input-container {
             padding: 40px;
             width: 60%;
-            background-color: #f9f9f9;
+            background-color: #fce4ec;
             border-right: 2px solid #ddd;
         }
         .sidebar {
             width: 40%;
-            background-color: #0072ff;
+            background-color: #ab47bc;
             color: white;
             padding: 40px;
             overflow-y: auto;
         }
-        .sidebar h2 {
-            margin-top: 0;
-            border-bottom: 2px solid white;
-            padding-bottom: 15px;
-            font-size: 2em;
-        }
         .input-container h1 {
             margin: 0 0 20px;
-            color: #0072ff;
+            color: #ab47bc;
             font-size: 2.5em;
         }
         #todo-input {
             width: calc(100% - 20px);
             padding: 15px;
             margin-bottom: 20px;
-            border: 2px solid #0072ff;
+            border: 2px solid #ab47bc;
             border-radius: 10px;
-            font-size: 1.1em;
-            color: #333;
-            background-color: #e6f7ff;
+            background-color: #fce4ec;
         }
         #add-btn, #save-btn {
             width: 48%;
             padding: 15px;
             border: none;
-            background-color: #0072ff;
             color: white;
             border-radius: 10px;
             font-size: 1.1em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
             margin-right: 4%;
         }
-        #add-btn:hover, #save-btn:hover {
-            background-color: #005cbf;
+        #add-btn {
+            background-color: #ce93d8;
+        }
+        #add-btn:hover {
+            background-color: #ab47bc;
         }
         #save-btn {
-            background-color: #00c6ff;
+            background-color: #e1bee7;
             margin-right: 0;
+        }
+        #save-btn:hover {
+            background-color: #ab47bc;
         }
         ul {
             list-style-type: none;
@@ -84,13 +79,13 @@
         li {
             padding: 15px;
             margin-bottom: 10px;
-            background-color: #005cbf;
+            background-color: #ab47bc;
             border-radius: 10px;
+            color: white;
+            font-size: 1.1em;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
-            font-size: 1.1em;
         }
         .delete-btn {
             background-color: #ff4d4d;
@@ -99,7 +94,6 @@
             padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
         .delete-btn:hover {
             background-color: #cc0000;
@@ -108,63 +102,16 @@
 </head>
 <body>
     <div class="main-container">
-        <!-- Input Section -->
         <div class="input-container">
             <h1>Add Your Tasks</h1>
             <input type="text" id="todo-input" placeholder="Enter your task">
             <button id="add-btn">Add</button>
             <button id="save-btn">Save & View</button>
         </div>
-        
-        <!-- Sidebar with To-Do List -->
         <div class="sidebar">
             <h2>To-Do List</h2>
             <ul id="todo-list"></ul>
         </div>
     </div>
-
-    <script>
-        // Function to add a new to-do item
-        document.getElementById('add-btn').addEventListener('click', function() {
-            const task = document.getElementById('todo-input').value;
-
-            if (task.trim() === "") {
-                alert("Please enter a task!");
-                return;
-            }
-
-            const li = document.createElement('li');
-            li.textContent = task;
-
-            // Create delete button
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete';
-            deleteBtn.classList.add('delete-btn');
-            deleteBtn.addEventListener('click', function() {
-                li.remove();
-            });
-
-            li.appendChild(deleteBtn);
-            document.getElementById('todo-list').appendChild(li);
-
-            // Clear the input field
-            document.getElementById('todo-input').value = '';
-        });
-
-        // Function to save the to-do list and navigate to the saved list page
-        document.getElementById('save-btn').addEventListener('click', function() {
-            const todos = [];
-            const listItems = document.querySelectorAll('#todo-list li');
-
-            listItems.forEach(item => {
-                todos.push(item.textContent.replace('Delete', '').trim());
-            });
-
-            localStorage.setItem('todos', JSON.stringify(todos));
-
-            // Redirect to the saved list page
-            window.location.href = 'saved.html';
-        });
-    </script>
 </body>
 </html>
