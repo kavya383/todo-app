@@ -113,5 +113,50 @@
             <ul id="todo-list"></ul>
         </div>
     </div>
+    <script>
+    // Function to add a new to-do item
+    document.getElementById('add-btn').addEventListener('click', function() {
+        const taskInput = document.getElementById('todo-input');
+        const task = taskInput.value;
+
+        if (task.trim() === "") {
+            alert("Please enter a task!");
+            return;
+        }
+
+        const li = document.createElement('li');
+        li.textContent = task;
+
+        // Create delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.addEventListener('click', function() {
+            li.remove();
+        });
+
+        li.appendChild(deleteBtn);
+        document.getElementById('todo-list').appendChild(li);
+
+        // Clear the input field
+        taskInput.value = '';
+    });
+
+    // Function to save the to-do list and navigate to the saved list page
+    document.getElementById('save-btn').addEventListener('click', function() {
+        const todos = [];
+        const listItems = document.querySelectorAll('#todo-list li');
+
+        listItems.forEach(item => {
+            todos.push(item.textContent.replace('Delete', '').trim());
+        });
+
+        localStorage.setItem('todos', JSON.stringify(todos));
+
+        // Redirect to the saved list page
+        window.location.href = 'saved.html';
+    });
+</script>
+
 </body>
 </html>
